@@ -1,5 +1,7 @@
 # AffenbananenRechner
 
+[![Build .NET 8 Project](https://github.com/damian1607/AffenbananenRechner/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/damian1607/AffenbananenRechner/actions/workflows/dotnet-desktop.yml) [![Latest Release](https://img.shields.io/github/release/damian1607/AffenbananenRechner.svg)](https://github.com/damian1607/AffenbananenRechner/releases)
+
 <img src="https://raw.githubusercontent.com/damian1607/AffenbananenRechner/refs/heads/main/Images/banana.png" alt="Banane" width="200"/>
 
 Der einzigartige Rechner, der voll mit **Affenbananen** ist.
@@ -22,7 +24,7 @@ Weil Zahlen allein langweilig sind! Der AffenbananenRechner verwandelt trockene 
     git clone https://github.com/damian1607/AffenbananenRechner.git
     ```
     
-2. **Solution öffnen**: Öffne die Datei `AffenbananenRechner.sln` in der IDE deiner Wahl.
+2. **Solution öffnen**: Öffne die Datei `AffenbananenRechner.sln` in Visual Studio (empfohlen: Version 2022 oder höher).
 3. **Build & Run**: Drücke `F5`, um das Programm zu starten.
 
 ### 🌟 Noch nicht überzeugt?
