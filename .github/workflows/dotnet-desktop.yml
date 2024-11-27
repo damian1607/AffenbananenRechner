@@ -1,0 +1,41 @@
+name: Build .NET 8 Project
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+
+    runs-on: windows-latest  # Du kannst hier auch "ubuntu-latest" oder "macos-latest" verwenden, je nach Bedarf.
+
+    env:
+      Solution_Name: AffenbananenRechner.sln   # Ersetze dies mit dem Namen deiner Solution-Datei.
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up .NET 8 SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x   # Verwende .NET 8, wie du es erwähnt hast.
+
+    - name: Restore dependencies
+      run: dotnet restore ${{ env.Solution_Name }}
+
+    - name: Build the application
+      run: dotnet build ${{ env.Solution_Name }} --configuration ${{ matrix.configuration }}
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: Build Artifacts
+        path: ${{ env.Solution_Name }}/bin/${{ matrix.configuration }}
