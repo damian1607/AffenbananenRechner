@@ -22,7 +22,7 @@ Weil Zahlen allein langweilig sind! Der AffenbananenRechner verwandelt trockene 
     git clone https://github.com/damian1607/AffenbananenRechner.git
     ```
     
-2. **Solution öffnen**: Öffne die Datei `AffenbananenRechner.sln` in Visual Studio (empfohlen: Version 2022 oder höher).
+2. **Solution öffnen**: Öffne die Datei `AffenbananenRechner.sln` in der IDE deiner Wahl.
 3. **Build & Run**: Drücke `F5`, um das Programm zu starten.
 
 ### 🌟 Noch nicht überzeugt?
