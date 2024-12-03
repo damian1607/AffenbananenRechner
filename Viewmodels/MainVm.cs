@@ -1,82 +1,72 @@
 ﻿using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
+using AffenbananenRechner.Pages;
 using iNKORE.UI.WPF.Modern.Common.IconKeys;
 using iNKORE.UI.WPF.Modern.Controls;
+using Page = iNKORE.UI.WPF.Modern.Controls.Page;
 
 namespace AffenbananenRechner.Viewmodels {
     internal class MainVm : INotifyPropertyChanged {
 
-        Window mainWindow;
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged(string propertyName) {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        // Commands
-        public ICommand CommandCalculate { get; }
-        public ICommand CommandClear { get; }
-        public ICommand CommandAddSymbol { get; }
-
         // Binding Variablen
-        private string calcText;
-        public string CalcText {
-            get { return calcText; }
+        private Page currentPage;
+        public Page CurrentPage {
+            get { return currentPage; }
             set {
-                if (calcText != value) {
-                    calcText = value;
-                    OnPropertyChanged(nameof(CalcText));
+                if (currentPage != value) {
+                    currentPage = value;
+                    OnPropertyChanged(nameof(CurrentPage));
                 }
             }
         }
 
+        private NavigationViewItem? selectedNavItem;
+        public NavigationViewItem? SelectedNavItem {
+            get { return selectedNavItem; }
+            set {
+                if (selectedNavItem != value) {
+                    selectedNavItem = value;
+                    OnPropertyChanged(nameof(SelectedNavItem));
+                    updatePage();
+                }
+            }
+        }
+
+        private HomePage homePage = new();
+        private SettingsPage settingsPage = new();
+
 
         // Konstruktor
-        public MainVm(Window window) {
-            CommandCalculate = new RoutedUICommand("", "CommandCalculate", typeof(MainVm));
-            CommandClear = new RoutedUICommand("", "CommandClear", typeof(MainVm));
-            CommandAddSymbol = new RoutedUICommand("", "CommandAddSymbol", typeof(MainVm));
-            mainWindow = window;
-            CreateCommandBindings();
+        public MainVm(Window window, NavigationView navigationView) {
+            currentPage = homePage;
+            selectedNavItem = navigationView.MenuItems.OfType<NavigationViewItem>().FirstOrDefault(item => item.Content.ToString() == "Home");
         }
 
-        private void CreateCommandBindings() {
-            mainWindow.CommandBindings.Add(new CommandBinding(CommandCalculate, calculateResult, canCalculate));
-            mainWindow.CommandBindings.Add(new CommandBinding(CommandClear, clearCalcText, canCalculate));
-            mainWindow.CommandBindings.Add(new CommandBinding(CommandAddSymbol, addSymbol));
-        }
-
-        // Command Funktionen
-        private void calculateResult(object sender, ExecutedRoutedEventArgs e) {
-            try {
-                var result = new DataTable().Compute(CalcText.Replace(',', '.'), null);
-                CalcText = result.ToString();
+        //Page im Frame updaten
+        private void updatePage() {
+            if (selectedNavItem.Content.ToString() == "Home") {
+                CurrentPage = homePage;
             }
-            catch {
-                CalcText = "Error";
+            else if (selectedNavItem.Content.ToString() == "Einstellungen") {
+                CurrentPage = settingsPage;
             }
         }
 
-        private void clearCalcText(object sender, ExecutedRoutedEventArgs e) {
-            CalcText = string.Empty;
-        }
-
-        private void addSymbol(object sender, ExecutedRoutedEventArgs e) {
-            string buttonParam = e.Parameter as string;
-            CalcText += buttonParam;
-        }
-
-        // CanExecutes
-        private void canCalculate(object sender, CanExecuteRoutedEventArgs e) {
-            e.CanExecute = !string.IsNullOrWhiteSpace(CalcText);
-        }
     }
 }

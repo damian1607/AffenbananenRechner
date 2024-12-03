@@ -1,0 +1,45 @@
+﻿<ui:Page x:Class="AffenbananenRechner.Pages.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AffenbananenRechner.Pages"
+      xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
+      xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="HomePage">
+    <ikw:SimpleStackPanel VerticalAlignment="Center" Spacing="5">
+        <!--Versionsinfos-->
+        <Image Source="/Images/banana.png" Height="100"/>
+        <TextBlock Text="AffenbananenRechner" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
+        <TextBlock Text="v0.3" FontSize="20" TextAlignment="Center"/>
+
+        <!-- Textbox für Eingaben -->
+        <TextBox Text="{Binding CalcText, UpdateSourceTrigger=PropertyChanged}" FontSize="20" HorizontalAlignment="Center" Width="250" Margin="0,10,0,10" TextAlignment="Right" Height="40"/>
+
+        <!-- Rechner Buttons -->
+        <UniformGrid Rows="4" Columns="4" HorizontalAlignment="Center" Width="250" Height="250">
+            <!-- Nummer Buttons -->
+            <Button Command="{Binding CommandAddSymbol}" CommandParameter="7" Content="7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2" FontSize="18"/>
+            <Button Command="{Binding CommandAddSymbol}" CommandParameter="8" Content="8" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2" FontSize="18"/>
+            <Button Command="{Binding CommandAddSymbol}" CommandParameter="9" Content="9" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2" FontSize="18"/>
+            <Button Command="{Binding CommandAddSymbol}" CommandParameter="/" Content="/" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2" FontSize="18"/>
+
+            <Button Command="{Binding CommandAddSymbol}" CommandParameter="4" Content="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2" FontSize="18"/>
+            <Button Command="{Binding CommandAddSymbol}" CommandParameter="5" Content="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2" FontSize="18"/>
+            <Button Command="{Binding CommandAddSymbol}" CommandParameter="6" Content="6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2" FontSize="18"/>
+            <Button Command="{Binding CommandAddSymbol}" CommandParameter="*" Content="*" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2" FontSize="18"/>
+
+            <Button Command="{Binding CommandAddSymbol}" CommandParameter="1" Content="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2" FontSize="18"/>
+            <Button Command="{Binding CommandAddSymbol}" CommandParameter="2" Content="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2" FontSize="18"/>
+            <Button Command="{Binding CommandAddSymbol}" CommandParameter="3" Content="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2" FontSize="18"/>
+            <Button Command="{Binding CommandAddSymbol}" CommandParameter="-" Content="-" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2" FontSize="18"/>
+
+            <Button Command="{Binding CommandClear}" Content="C" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2" FontWeight="Bold" FontSize="18" Background="LightCoral"/>
+            <Button Command="{Binding CommandAddSymbol}" CommandParameter="0" Content="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2" FontSize="18"/>
+            <Button Command="{Binding CommandCalculate}" Content="=" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2" FontWeight="Bold" FontSize="18" Background="LightGreen"/>
+            <Button Command="{Binding CommandAddSymbol}" CommandParameter="+" Content="+" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2" FontSize="18"/>
+        </UniformGrid>
+    </ikw:SimpleStackPanel>
+</ui:Page>

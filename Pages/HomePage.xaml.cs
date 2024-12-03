@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,17 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using AffenbananenRechner.Pages;
 using AffenbananenRechner.Viewmodels;
+using Page = iNKORE.UI.WPF.Modern.Controls.Page;
 
-namespace AffenbananenRechner {
+namespace AffenbananenRechner.Pages {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for HomePage.xaml
     /// </summary>
-    public partial class MainWindow : Window {
-        public MainWindow() {
+    public partial class HomePage : Page {
+        public HomePage() {
             InitializeComponent();
-            MainVm vm = new MainVm(this, NavView);
+            HomePageVm vm = new HomePageVm(this);
             this.DataContext = vm;
         }
     }
